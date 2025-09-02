@@ -3,6 +3,12 @@ name = "manifest-std"
 version = "0.1.0"
 edition = "2021"
 build = "build.rs"
+readme = "README.md"
+license = "Apache-2.0"
+description = "Standard library for the Manifest Network contracts"
+repository = "https://github.com/manifest-network/manifest-std"
+homepage = "https://manifest.network"
+keywords = ["blockchain", "web3", "cosmwasm", "manifest"]
 
 [dependencies]
 prost = "0.14.1"
