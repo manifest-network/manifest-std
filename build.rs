@@ -1,8 +1,9 @@
 use std::collections::HashSet;
 use prost::Message;
 use prost_types::FileDescriptorSet;
-use std::fs;
+use std::{env, fs};
 use std::io::Result;
+use std::path::PathBuf;
 use heck::ToUpperCamelCase;
 
 const PROTOS: &[&str] = &[
@@ -72,15 +73,13 @@ const PROTOS: &[&str] = &[
 ];
 
 fn main() -> Result<()> {
-    let out_dir = "src/gen";
-    std::fs::create_dir_all(out_dir)?;
+    let out_dir = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR not set"));
     println!("cargo:rerun-if-changed=proto");
 
-    let desc_path = format!("{}/descriptors.bin", out_dir);
+    let desc_path = out_dir.join("descriptors.bin");
 
     prost_build::Config::new()
         .include_file("mod.rs") // Generates a file which contains a set of pub mod XXX statements combining to load all Rust files generated.
-        .out_dir(out_dir)
         .file_descriptor_set_path(&desc_path)
         .compile_well_known_types()
         .compile_protos(PROTOS,&["proto"])?;
@@ -131,6 +130,6 @@ fn main() -> Result<()> {
         }
     }
 
-    fs::write(format!("{}/type_urls.rs", out_dir), out)?;
+    fs::write(out_dir.join("type_urls.rs"), out)?;
     Ok(())
 }

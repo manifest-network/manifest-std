@@ -1,3 +1,2 @@
-include!("gen/mod.rs");
-
-include!("gen/type_urls.rs");
+include!(concat!(env!("OUT_DIR"), "/mod.rs"));
+include!(concat!(env!("OUT_DIR"), "/type_urls.rs"));
