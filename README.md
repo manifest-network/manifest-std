@@ -3,6 +3,8 @@
   <a href="#overview"><img src="https://raw.githubusercontent.com/cosmos/chain-registry/00df6ff89abd382f9efe3d37306c353e2bd8d55c/manifest/images/manifest.png" alt="Lifted Initiative" width="100"/></a>
 </p>
 
+![Crates.io Version](https://img.shields.io/crates/v/manifest-std)
+
 This crate generates Rust bindings from `.proto` files using `prost-build` and emits compile‑time `TYPE_URL` constants for selected packages. 
 
 
