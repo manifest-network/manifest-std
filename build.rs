@@ -73,6 +73,11 @@ const PROTOS: &[&str] = &[
 ];
 
 fn main() -> Result<()> {
+    #[cfg(feature = "build-protoc")]
+    {
+        println!("build-protoc feature is enabled");
+        env::set_var("PROTOC", protobuf_src::protoc());
+    }
     let out_dir = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR not set"));
     println!("cargo:rerun-if-changed=proto");
 
